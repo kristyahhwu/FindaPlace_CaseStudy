@@ -1,7 +1,9 @@
 **Find a Place: Full-Stack Project**
+
 Find a place is a community based project that offers a variety of shelter locations for domestic violences victims or people who want to help with their friends and family members that suffers from it.
 
 **Dependencies**
+
 Project is built with Java, Spring Boot, Thymeleaf, JQuery, MySQL and Bootstrap. Full list included in pom.xml file.
 
 **How to Run**
