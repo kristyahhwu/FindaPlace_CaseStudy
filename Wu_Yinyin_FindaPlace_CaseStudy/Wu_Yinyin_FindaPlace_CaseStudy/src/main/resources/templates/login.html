@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- apply same color to all buttons -->
+    <style>
+    .btn {
+      background-color: #b93a5d;
+    }
+
+
+    </style>
+
+</head>
+<body>
+
+<div>
+    <div class="container-fluid text-center">
+
+        <!-- navbar -->
+        <div>
+            <a href="#"><img src="./images/logo.jpg" alt="logo"/></a>
+            <h1><a href="#">Findaplace</a></h1>
+        </div>
+        <div th:replace="navbar :: navbar">
+
+        <!-- login form -->
+        <img th:src="@{/images/logo.jpg}" height="100" style="padding-bottom: 5px;"/>
+        <h2>Please Login</h2>
+        <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+            <div th:if="${param.logout}">
+                <p class="text-warning">logout successfully.</p>
+            </div>
+
+            <div class="bg-white border border-secondary rounded p-3">
+                <br>
+                Login or create an account:
+                <p>
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                </p>
+                <p>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </p>
+                <p>
+                    <input type="submit" value="Login" class="btn btn-primary"/>
+                </p>
+                <p>
+                    <a th:href="@{/register}">Not a registered user? sign up here.</a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <div class="text-center text-dark p-3 mt-5" style="background-color: rgba(0, 0, 0, 0.2);">
+            <img src="/images/home.png" width="300" height="300" class="image-embedded" allowFullScreen>
+            </img>
+            <div> 2023 Copyright FindaPlace
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>

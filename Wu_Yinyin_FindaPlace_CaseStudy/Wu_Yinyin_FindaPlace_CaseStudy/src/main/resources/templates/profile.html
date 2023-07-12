@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+    <!-- apply same color to all buttons -->
+    <style>
+    .btn {
+      background-color: #b93a5d;
+    }
+
+    </style>
+</head>
+<body>
+
+<!-- navbar -->
+<div class="container-fluid">
+    <a href="#"><img src="./images/logo.jpg" alt="logo"/></a>
+    <h1><a href="#">Findaplace</a></h1>
+</div>
+<div th:replace="~{navbar :: navbar}"></div>
+
+<!-- content -->
+
+<div>
+    <h2>Accounts</h2>
+    <a th:href="@{/accounts/new}">New? Create an Account!</a>
+</div>
+
+<div th:if="${message != null}" class="alert alert-success">
+    [[${message}]]
+</div>
+
+<div>
+    <table class="table table-bordered table-striped table-hover table-responsive-xL">
+        <thead class="thead-light">
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="profile : ${listprofiles}">
+            <td>[[${profile.id}]]</td>
+            <td>[[${profile.email}]]</td>
+            <td>[[${profile.firstName}]]</td>
+            <td>[[${profile.lastName}]]</td>
+            <a th:href="@{'/profile/delete/' + ${profile.id}}" title="delete">delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</div>
+
+<footer class="text-center text-white" style="background-color: #f1f1f1;">
+    <div class="text-center text-dark p-3 mt-5" style="background-color: rgba(0, 0, 0, 0.2);">
+        <img src="/images/home.png" width="300" height="300" class="image-embedded" allowFullScreen>
+        </img>
+        <div> 2023 Copyright FindaPlace
+        </div>
+    </div>
+</footer>
+
+
+</body>
+</html>

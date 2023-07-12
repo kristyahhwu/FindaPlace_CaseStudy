@@ -1,0 +1,114 @@
+/* font import */
+@import url("https://fonts.cdnfonts.com/css/dacherry");
+@import url('https://fonts.cdnfonts.com/css/norwester');
+
+/* theme font */
+h1 {
+	color: #b93a5d;
+	font-family: "dacherry", sans-serif;
+	margin: 10px;
+}
+
+/* theme font */
+h2 {
+	color: rgb(255, 255, 255);
+	font-family: "dacherry", sans-serif;
+	margin: 10px;
+}
+
+h2:hover {
+	color: #b93a5d;
+}
+
+p {
+	font-family: "dacherry", sans-serif;
+}
+
+h5 {
+	color: white;
+	font-family: "dacherry", sans-serif;
+	margin: 10px;
+}
+
+h4 {
+	font-family: "dacherry", sans-serif;
+}
+
+#safe-exit-text {
+	text-align: center;
+	font-family: "norwester", sans-serif;
+}
+
+#safe-exit-text:hover {
+	text-align: center;
+	background-color: red;
+	opacity: 80%;
+}
+
+.card-img-top {
+	width: 100%;
+	height: 25vw;
+	object-fit: cover;
+	padding: 15px;
+}
+
+.card {
+	margin: 20px;
+}
+
+.card-title {
+	color: white;
+}
+
+.form_lines {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+table {
+	margin: 20px;
+}
+
+table,
+th,
+td {
+	border: 1px solid;
+	border-color: black;
+	padding: 20px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+	color: #b93a5d;
+	border-color: black;
+}
+
+.pagination > .active > a {
+	color: white;
+	background-color: #b93a5d !important;
+	*border: solid 1px #b93a5d !important;
+	border-color: black;
+}
+
+.pagination > .active > a:hover {
+	color: white;
+	background-color: #b93a5d !important;
+	border: solid 1px black;
+}
+
+.pagination > li > a:hover {
+	color: #b93a5d;
+	border: solid 1px black;
+}
+
+.footer {
+  position:fixed;
+  width:100%;
+  bottom:30px;
+  font-size:14px;
+  color:#000;
+}

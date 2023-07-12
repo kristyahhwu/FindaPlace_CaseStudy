@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FindaPlace</title>
+
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+
+  <!-- apply same color to all buttons -->
+  <style>
+    .btn {
+      background-color: #b93a5d;
+    }
+  </style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-sm navbar-white bg-white">
+  <div class="container-fluid">
+    <a class="navbar-logo" th:href="@{/}">
+      <img th:src="@{/images/logo.jpg}" th:height="100" />
+    </a>
+    <a class="navbar-brand" href="/">FindaPlace</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link active" th:href="@{/profile}">Profiles</a>
+        </li>
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link active" th:href="@{/events}">Events</a>
+        </li>
+        <li class="nav-item">
+          <a aria-current="page" class="nav-link active" th:href="@{/locations}">Locations</a>
+        </li>
+
+        <!-- only shows this after being signed in -->
+      <!--  <div sec:authorize="isAuthenticated()">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" sec:authentication="name"></a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" id="logout" href="">Logout</a>
+        </div>-->
+      </ul>
+    </div>
+  </div>
+</nav>
+</body>
+</html>
