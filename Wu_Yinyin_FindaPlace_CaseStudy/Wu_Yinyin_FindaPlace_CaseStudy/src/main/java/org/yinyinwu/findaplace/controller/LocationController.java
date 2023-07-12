@@ -15,8 +15,15 @@ import java.util.List;
 @Controller
 public class LocationController {
 
+
     @Autowired
     private LocationService locationService;
+
+//    @Autowired
+//    public LocationController(LocationService locationService){
+//        this.locationService = locationService;
+//    }
+
 
     @GetMapping("/location")
     public String listAllLocations(Model model) {
@@ -29,7 +36,6 @@ public class LocationController {
     @GetMapping("/location/add")
     public String addLocation(Model model){
         Location location = new Location();
-
         model.addAttribute("location", location);
         return "location_form";
     }

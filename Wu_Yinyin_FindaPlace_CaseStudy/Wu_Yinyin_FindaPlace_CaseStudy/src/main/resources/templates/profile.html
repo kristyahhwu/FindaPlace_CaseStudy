@@ -20,18 +20,9 @@
 </head>
 <body>
 
-<!-- navbar -->
-<div class="container-fluid">
-    <a href="#"><img src="./images/logo.jpg" alt="logo"/></a>
-    <h1><a href="#">Findaplace</a></h1>
-</div>
-<div th:replace="~{navbar :: navbar}"></div>
-
-<!-- content -->
-
 <div>
     <h2>Accounts</h2>
-    <a th:href="@{/accounts/new}">New? Create an Account!</a>
+    <a th:href="@{/register}">New? Create an Account!</a>
 </div>
 
 <div th:if="${message != null}" class="alert alert-success">
@@ -64,6 +55,7 @@
 
 </div>
 
+<!-- Footer -->
 <footer class="text-center text-white" style="background-color: #f1f1f1;">
     <div class="text-center text-dark p-3 mt-5" style="background-color: rgba(0, 0, 0, 0.2);">
         <img src="/images/home.png" width="300" height="300" class="image-embedded" allowFullScreen>
@@ -72,6 +64,12 @@
         </div>
     </div>
 </footer>
+</div>
+
+<!-- js -->
+<script src="/sba_html/index.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap.bundle.min.js"></script>
 
 
 </body>

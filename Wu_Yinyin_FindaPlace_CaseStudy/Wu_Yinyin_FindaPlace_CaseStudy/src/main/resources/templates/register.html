@@ -22,17 +22,42 @@
 
 <body>
 
-<!-- navbar -->
 <div class="container-fluid">
-    <a href="#"><img src="./images/logo.jpg" alt="logo"/></a>
-    <h1><a href="#">Findaplace</a></h1>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-sm navbar-white bg-white">
+        <a href="#"><img src="./images/logo.jpg" alt="logo" style="height: 100px"/></a>
+        <h1>Findaplace</a></h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ms-5 justify-content-end" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/location}">Locations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profile}">Profile</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Events or locations...">
+                <button class="btn btn-dark" type="button">Search</button>
+            </form>
+        </div>
+    </nav>
 </div>
-<div th:replace="~{navbar :: navbar}"></div>
+<!-- content -->
 
+<div th:if="${param.success}">
+    <div class="alert alert-info">you've successfully registered!</div>
+</div>
 
 <div>
     <h2>Register account </h2>
-    <br>
+    <em>After registering, you will be redirected to the login page.</em>
 </div>
 
 <form th:action="@{/profile/save}" method="post" th:object="${user}">
@@ -40,7 +65,7 @@
     <div class="bg-white border border-secondary rounded p-5" style="opacity: 0.9;">
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Email</label>
+            <label class="col-sm-4 col-form-label">📧Email</label>
             <div class="col-sm-8">
                 <input type="email" class="form-control" th:field="*{email}" required minlength="5"/>
             </div>
@@ -61,10 +86,16 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Password</label>
+            <label class="col-sm-4 col-form-label">🔑Password</label>
             <div class="col-sm-8">
-                <input th:if="${user.id==null}" input type="password" class="form-control" th:field="*{password}"
-                       required/>
+                <input th:if="${user.id==null}" input type="password" class="form-control" th:field="*{password}" required/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-4 col-form-label">Status</label>
+            <div class = "col-sm-8">
+                <input type = "checkbox" th:field="*{loggedin}" />
             </div>
         </div>
 
@@ -86,6 +117,35 @@
         </div>
     </div>
 </footer>
+
+<!-- js -->
+<script src="/sba_html/index.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+<script type="text/javascript" src="/scripts/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#buttonCancel").on("click", function() {
+			window.location = "[[@{/accounts}]]";
+        });
+    });
+
+    function checkEmailUnique(form) {
+        url = "[[@{/accounts/check_email}]]";
+        userEmail = $("#email").val();
+        userId = $("#id").val();
+    	csrfValue = $("input[name='_csrf']").val();
+    	params = {id: userId, email: userEmail, _csrf: csrfValue};
+
+     	$.post(url, params, function(response) {
+    		if (response == "OK") {
+				form.submit();
+			} else if (response == "Duplicated") {
+				alert("This email is registered to an account already.");
+			}
+		});
+		return false;
+    }
+</script>
 
 </body>
 </html>

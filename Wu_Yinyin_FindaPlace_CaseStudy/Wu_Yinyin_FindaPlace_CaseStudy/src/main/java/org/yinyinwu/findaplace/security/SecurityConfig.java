@@ -41,10 +41,9 @@ public class SecurityConfig {
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.authorizeHttpRequests((auth) -> auth
-                                .requestMatchers("/", "/register/**", "/location").permitAll()
-                .requestMatchers("/css/*", "/js/*", "/images/*").permitAll()
-                                .requestMatchers("/profile/**")
-                                .hasAnyRole("ADMIN","USER").anyRequest().authenticated())
+                                .requestMatchers("/", "/register/**", "/location/**").permitAll()
+                                .requestMatchers("/css/*", "/js/*", "/images/*").permitAll()
+                                .requestMatchers("/profile").hasAnyRole("ADMIN","USER").anyRequest().authenticated())
 
                 .formLogin(
                         form -> form
@@ -60,5 +59,7 @@ public class SecurityConfig {
                 );
       return http.build();
 
+        // * is 1 level wildcard
+        // ** is everything under the path
     }
 }

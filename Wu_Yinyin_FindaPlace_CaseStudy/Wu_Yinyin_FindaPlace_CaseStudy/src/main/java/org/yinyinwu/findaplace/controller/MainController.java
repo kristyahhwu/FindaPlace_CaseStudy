@@ -11,10 +11,11 @@ public class MainController {
     // return to index page
     @GetMapping("/")
     public String home(){
+        System.out.println("going back to home");
         return "index";
     }
 
-    // handles login and logout
+    // handles login
     @GetMapping("/login")
     public String login(Model model){
         User user = new User();

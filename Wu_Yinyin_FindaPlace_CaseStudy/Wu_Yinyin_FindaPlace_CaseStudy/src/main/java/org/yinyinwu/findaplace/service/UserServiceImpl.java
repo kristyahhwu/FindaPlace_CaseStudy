@@ -4,6 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.yinyinwu.findaplace.exceptions.AuthencationException;
 import org.yinyinwu.findaplace.model.Role;
 import org.yinyinwu.findaplace.model.User;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
    private UserRepository userRepository;
 
     private BCryptPasswordEncoder encoder;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     @Autowired
@@ -97,7 +101,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void encoder(User user) {
-
+        String encoder = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encoder);
     }
 
     public void deleteUser(Integer id) throws AuthencationException {

@@ -19,6 +19,8 @@
     }
 
 
+
+
     </style>
 
 </head>
@@ -28,18 +30,21 @@
     <div class="container-fluid text-center">
 
         <!-- navbar -->
-<!--        <div th:replace="~{navbar :: navbar}"></div>-->
+        <!--        <div th:replace="~{navbar :: navbar}"></div>-->
 
         <!-- login form -->
-        <img th:src="@{/images/logo.jpg}" height="100" style="padding-bottom: 5px;"/>
+        <a class="navbar-logo" th:href="@{/}">
+            <img th:src="@{/images/logo.jpg}" height="100" style="padding-bottom: 5px;"/> </a>
         <h2>Please Login</h2>
         <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+            <div th:if="${param.error}">
+                <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+            </div>
             <div th:if="${param.logout}">
                 <p class="text-warning">logout successfully.</p>
             </div>
 
             <div class="bg-white border border-secondary rounded p-3">
-                <br>
                 Login or create an account:
                 <p>
                     <input type="email" name="email" class="form-control" placeholder="Email" required>
@@ -60,14 +65,17 @@
     <!-- Footer -->
     <footer class="text-center text-white" style="background-color: #f1f1f1;">
         <div class="text-center text-dark p-3 mt-5" style="background-color: rgba(0, 0, 0, 0.2);">
-            <img src="/images/home.png" width="300" height="300" class="image-embedded" allowFullScreen>
+            <img src="/images/home.png" width="100" height="100" class="image-embedded" allowFullScreen>
             </img>
-            <div> 2023 Copyright FindaPlace
+            <div> 2023 Copyright @ Yinyin Wu
             </div>
         </div>
     </footer>
 
-</div>
+    <!-- js -->
+    <script src="/sba_html/index.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/scripts/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

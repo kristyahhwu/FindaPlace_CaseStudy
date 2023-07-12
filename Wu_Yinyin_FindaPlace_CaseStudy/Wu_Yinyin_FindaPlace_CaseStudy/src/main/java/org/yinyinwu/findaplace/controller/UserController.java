@@ -44,30 +44,40 @@ public class UserController {
         return "profile";
     }
 
-    // register form for new users
-    @GetMapping("/register")
-    public String registerForm(Model model){
-        UserDTO user = new UserDTO();
-        user.setLoggedin(true);
-        model.addAttribute("user", user);
-        return "register";
+    @PostMapping("/login")
+    public String login(){
+        return "redirect:/profile";
     }
 
     // add new user
     @GetMapping("/profile/add")
     public String addUser(Model model){
         UserDTO user = new UserDTO();
-       // List<Role> listAllRoles = userService.listAllUsers();
+        // List<Role> listAllRoles = userService.listAllUsers();
         user.setLoggedin(true);
 
         model.addAttribute("user", user);
-       // model.addAttribute("listAllRoles", listAllRoles);
-        return "profile";
+        model.addAttribute("pageTitle", "Create New Account");
+        // model.addAttribute("listAllRoles", listAllRoles);
+        return "register";
     }
+
+    // register form for new users
+    @GetMapping("/register")
+    public String registerForm(Model model){
+        UserDTO user = new UserDTO();
+        user.setLoggedin(true);
+        model.addAttribute("user", user);
+        model.addAttribute("pageTitle", "Create New Account");
+        return "register";
+    }
+
+
 
     // save user and redirect to profile page
     @PostMapping("/profile/save")
     public String saveUser(User user, RedirectAttributes redirectAttributes){
+        System.out.println(user);
         userService.saveUser(user);
         redirectAttributes.addFlashAttribute("message", "account created and saved");
         return "redirect:/profile";
@@ -78,7 +88,6 @@ public class UserController {
         try{
             userService.deleteUser(id);
             redirectAttributes.addFlashAttribute("message", "user deleted");
-
         } catch (AuthencationException ex) {
             redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/profile";
