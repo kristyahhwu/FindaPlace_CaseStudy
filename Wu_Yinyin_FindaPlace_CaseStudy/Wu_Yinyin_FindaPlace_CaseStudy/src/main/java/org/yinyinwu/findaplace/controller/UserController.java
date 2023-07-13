@@ -15,6 +15,7 @@ import org.yinyinwu.findaplace.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 // import org.yinyinwu.findaplace.service.RoleService;
+import org.yinyinwu.findaplace.service.UserService;
 import org.yinyinwu.findaplace.service.UserServiceImpl;
 
 import java.util.List;
@@ -29,6 +30,13 @@ public class UserController {
 
     private RedirectAttributes redirectAttributes;
     // private RoleService roleService;
+
+    @Autowired
+    private UserService userSe;
+
+    public UserController(UserService userService) {
+        this.userSe = userService;
+    }
 
     Logger logger = LoggerFactory.getLogger(LocationController.class);
 
@@ -59,7 +67,6 @@ public class UserController {
         user.setLoggedin(true);
 
         model.addAttribute("user", user);
-        model.addAttribute("pageTitle", "Create New Account");
         // model.addAttribute("listAllRoles", listAllRoles);
         return "register";
     }
@@ -70,7 +77,6 @@ public class UserController {
         User user = new User();
         user.setLoggedin(true);
         model.addAttribute("user", user);
-        model.addAttribute("pageTitle", "Create New Account");
         return "register";
     }
 
@@ -84,11 +90,11 @@ public class UserController {
     }
 
     // save user and redirect to profile page
-    @PostMapping("/profile/save")
+    @PostMapping("/register/save")
     public String saveUser(User user, RedirectAttributes redirectAttributes){
         System.out.println(user);
         User savedUser = userService.saveUser(user);
-        userService.saveUser(savedUser);
+        // userService.saveUser(savedUser);
         redirectAttributes.addFlashAttribute("message", "account created and saved");
         return "redirect:/profile";
     }

@@ -10,7 +10,7 @@ import org.yinyinwu.findaplace.model.Role;
 import org.yinyinwu.findaplace.model.User;
 import org.yinyinwu.findaplace.repository.RoleRepository;
 import org.yinyinwu.findaplace.repository.UserRepository;
-import jakarta.transaction.Transactional;
+import jakarta.transaction.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
     }*/
 
 
+    // retrieve a user object from db
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String userName) {
@@ -62,8 +63,8 @@ public class UserServiceImpl implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User
+                (user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
@@ -100,7 +101,7 @@ public class UserServiceImpl implements UserService {
                 user.setPassword(encoder.encode(user.getPassword()));
                 user.setRoles(Arrays.asList(roleService.findRoleByRoleName("ROLE_USER")));
                 System.out.println("user saved.");
-                userRepository.save(user);
+                // userRepository.save(user);
             }
         }
         return userRepository.save(user);

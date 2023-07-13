@@ -8,6 +8,7 @@ import org.yinyinwu.findaplace.model.User;
 
 public interface LocationRepository extends CrudRepository<Location, Integer> {
 
+    // custom query
     @Query("SELECT l FROM Location l WHERE l.name = :name")
     Location findLocationByName(@Param("name") String name);
 
