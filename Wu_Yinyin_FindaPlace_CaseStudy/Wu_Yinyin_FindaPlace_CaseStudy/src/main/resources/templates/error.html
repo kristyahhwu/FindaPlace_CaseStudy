@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login</title>
+    <title>FindaPlace</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -17,10 +17,13 @@
     }
 
 
+
+
     </style>
+
 </head>
 <body>
-<div class="container-fluid text-center">
+<div class="container-fluid">
     <!-- navbar -->
     <nav class="navbar navbar-expand-sm navbar-white bg-white">
         <a href="#"><img src="./images/logo.jpg" alt="logo" style="height: 100px"/></a>
@@ -50,36 +53,15 @@
         </div>
     </nav>
 
-    <!-- content -->
-    <div>
-        <h1>Add location form</h1>
+    <!-- display wrong message -->
+    <div class="m-3">
+        <div class="error-body">
+            <h3>Oops, wrong redirects or something else</h3>
+            <p>
+                <a href="http://localhost:8080">Go back to home page</a>
+            </p>
+        </div>
     </div>
-
-    <form th:action="@{/location/save}" method="post" th:object="${location}" enctype="multipart/form-data">
-        <input type="hidden" th:field="*{id}"/>
-
-        <div th:fragment="content" th:remove="tag">
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{name}" required minlength="2"/>
-                </div>
-            </div>
-
-                <br />
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Address</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" th:field="*{address}"/>
-                </div>
-            </div>
-                <div class="text-center">
-                    <input type="submit" value="submit" class="btn btn-primary m-3"/>
-                    <input type="button" value="cancel" class="btn btn-secondary" id="cancel"/>
-                </div>
-        </div>
-        </div>
-    </form>
 
     <!-- Footer -->
     <footer class="text-center text-white" style="background-color: #f1f1f1;">
@@ -95,7 +77,7 @@
     <script src="/sba_html/index.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
     <script type="text/javascript" src="/scripts/bootstrap.bundle.min.js"></script>
-
+</div>
 
 </body>
 </html>

@@ -16,13 +16,43 @@
       background-color: #b93a5d;
     }
 
+
     </style>
 </head>
 <body>
 
-<div>
-    <h2>Accounts</h2>
-    <a th:href="@{/register}">New? Create an Account!</a>
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-sm navbar-white bg-white">
+        <a href="#"><img src="./images/logo.jpg" alt="logo" style="height: 100px"/></a>
+        <h1>Findaplace</a></h1>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ms-5 justify-content-end" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/location}">Locations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/profile}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/register}">Register</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="Events or locations...">
+                <button class="btn btn-dark" type="button">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <!-- content -->
+    <h1>Accounts</h1>
+    <p><a th:href="@{/profile/add}">New? Create an Account!</a></p>
 </div>
 
 <div th:if="${message != null}" class="alert alert-success">
@@ -41,7 +71,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="profile : ${listprofiles}">
+        <tr th:each="profile : ${listProfile}">
             <td>[[${profile.id}]]</td>
             <td>[[${profile.email}]]</td>
             <td>[[${profile.firstName}]]</td>
@@ -55,21 +85,31 @@
 
 </div>
 
+
 <!-- Footer -->
 <footer class="text-center text-white" style="background-color: #f1f1f1;">
     <div class="text-center text-dark p-3 mt-5" style="background-color: rgba(0, 0, 0, 0.2);">
-        <img src="/images/home.png" width="300" height="300" class="image-embedded" allowFullScreen>
+        <img src="/images/home.png" width="100" height="100" class="image-embedded" allowFullScreen>
         </img>
-        <div> 2023 Copyright FindaPlace
+        <div> 2023 Copyright @ Yinyin Wu
         </div>
     </div>
 </footer>
-</div>
 
 <!-- js -->
 <script src="/sba_html/index.js"></script>
 <script type="text/javascript" src="/scripts/bootstrap.min.js"></script>
 <script type="text/javascript" src="/scripts/bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e) {
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'profile');
+        });
+    });
+
+</script>
 
 
 </body>

@@ -17,12 +17,15 @@
     }
 
 
+
+
+
     </style>
 </head>
 
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid text-center">
     <!-- navbar -->
     <nav class="navbar navbar-expand-sm navbar-white bg-white">
         <a href="#"><img src="./images/logo.jpg" alt="logo" style="height: 100px"/></a>
@@ -49,18 +52,18 @@
         </div>
     </nav>
 </div>
-<!-- content -->
 
+<!-- content -->
 <div th:if="${param.success}">
     <div class="alert alert-info">you've successfully registered!</div>
 </div>
 
 <div>
-    <h2>Register account </h2>
+    <h1>Register account </h1>
     <em>After registering, you will be redirected to the login page.</em>
 </div>
 
-<form th:action="@{/profile/save}" method="post" th:object="${user}">
+<form th:action="@{/profile/save}" method="post" th:object="${user}" enctype="multipart/form-data">
     <input type="hidden" th:field="*{id}"/>
     <div class="bg-white border border-secondary rounded p-5" style="opacity: 0.9;">
 
@@ -88,14 +91,15 @@
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">🔑Password</label>
             <div class="col-sm-8">
-                <input th:if="${user.id==null}" input type="password" class="form-control" th:field="*{password}" required/>
+                <input th:if="${user.id==null}" input type="password" class="form-control" th:field="*{password}"
+                       required/>
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-sm-4 col-form-label">Status</label>
-            <div class = "col-sm-8">
-                <input type = "checkbox" th:field="*{loggedin}" />
+            <div class="col-sm-8">
+                <input type="checkbox" th:field="*{loggedin}"/>
             </div>
         </div>
 
@@ -145,6 +149,9 @@
 		});
 		return false;
     }
+
+
+
 </script>
 
 </body>

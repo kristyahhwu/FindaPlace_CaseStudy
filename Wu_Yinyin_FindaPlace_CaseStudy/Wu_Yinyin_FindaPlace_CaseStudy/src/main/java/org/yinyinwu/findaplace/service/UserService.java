@@ -12,12 +12,16 @@ public interface UserService extends UserDetailsService {
 
     User findUserByEmail(String email);
 
-    void saveUser(User user);
+    public User saveUser(User user);
 
     public User getUser(Integer id);
 
     void encoder(User user);
 
     List<User> listAllUsers();
+
+    public boolean isEmailUnique(Integer id, String email);
+
+
 
 }

@@ -22,7 +22,7 @@ public class LocationService {
         return locationRepository.save(location);
     }
 
-    public void deleteLocation(Integer id) throws AuthencationException {
+    public void deleteLocation(Integer id) throws AuthencationException{
         Integer numberId = locationRepository.countById(id);
         if (numberId == null) {
             throw new AuthencationException("location not found");

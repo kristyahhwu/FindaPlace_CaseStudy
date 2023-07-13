@@ -24,9 +24,11 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-   private RoleService roleService;
+    @Autowired
+    private RoleService roleService;
 
-   private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private BCryptPasswordEncoder encoder;
 
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    public UserServiceImpl(RoleService roleService, UserRepository userRepository,@Lazy BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(RoleService roleService, UserRepository userRepository, @Lazy BCryptPasswordEncoder encoder) {
         this.roleService = roleService;
         this.userRepository = userRepository;
         this.encoder = encoder;
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService {
 
 
     // display all users and put into a list
-    public List<User> listAllUsers(){
+    public List<User> listAllUsers() {
         return (List<User>) userRepository.findAll();
     }
 
@@ -74,25 +76,34 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
-        return null;
+        User user = userRepository.findUserByEmail(email);
+        return user;
+    }
+
+    public boolean isEmailUnique(Integer id, String email) {
+        User userByEmail = userRepository.findUserByEmail(email);
+        if (userByEmail == null) {
+            return true;
+        }
+        return userByEmail.getId().equals(id);
     }
 
     @Transactional
-    public void saveUser(User user){
+    public User saveUser(User user) {
         boolean isSaved = (user.getId() != null);
         if (isSaved) {
             User existingUser = userRepository.findById(user.getId()).get();
 
-            if (user.getEmail().isEmpty()){
+            if (user.getEmail().isEmpty()) {
                 user.setPassword(existingUser.getPassword());
             } else {
                 user.setPassword(encoder.encode(user.getPassword()));
                 user.setRoles(Arrays.asList(roleService.findRoleByRoleName("ROLE_USER")));
+                System.out.println("user saved.");
                 userRepository.save(user);
             }
         }
-
-
+        return userRepository.save(user);
     }
 
     public User getUser(Integer id) {

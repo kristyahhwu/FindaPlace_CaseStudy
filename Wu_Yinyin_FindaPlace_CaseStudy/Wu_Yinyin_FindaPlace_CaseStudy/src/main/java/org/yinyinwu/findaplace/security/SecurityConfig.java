@@ -31,6 +31,7 @@ public class SecurityConfig {
         auth.setPasswordEncoder(passwordEncoder()); //set the password encoder - bcrypt
         return auth;
     }
+
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(11);
@@ -39,17 +40,17 @@ public class SecurityConfig {
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http.authorizeHttpRequests((auth) -> auth
-                                .requestMatchers("/", "/register/**", "/location/**").permitAll()
-                                .requestMatchers("/css/*", "/js/*", "/images/*").permitAll()
-                                .requestMatchers("/profile").hasAnyRole("ADMIN","USER").anyRequest().authenticated())
-
+                                .requestMatchers("/", "/profile/**", "/register/**", "/location/**").permitAll()
+                                .requestMatchers("/css/*", "/js/*", "/images/*").permitAll())
+//                                .requestMatchers("/profile").hasAnyRole("ADMIN","USER")
+//                        .anyRequest().authenticated())
                 .formLogin(
                         form -> form
                                 .loginPage("/login")
                                 .loginProcessingUrl("/login")
                                 .successForwardUrl("/profile")
+                                .defaultSuccessUrl("/profile", true)
                                 .permitAll())
                 .logout(logout -> logout
                          .invalidateHttpSession(true)
@@ -61,5 +62,12 @@ public class SecurityConfig {
 
         // * is 1 level wildcard
         // ** is everything under the path
+
+        //        http.csrf().disable()
+//                .authorizeHttpRequests((authorize) ->
+//                        authorize.requestMatchers("/","/index", "/register/**", "/location/").permitAll()
+//                                .requestMatchers("/css/*", "/js/*", "/images/*").permitAll()
+//                                .requestMatchers("/profile").hasAnyRole("ADMIN","USER")
+//                                .anyRequest().authenticated().and())
     }
 }

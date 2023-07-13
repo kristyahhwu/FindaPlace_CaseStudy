@@ -15,13 +15,4 @@ public class MainController {
         return "index";
     }
 
-    // handles login
-    @GetMapping("/login")
-    public String login(Model model){
-        User user = new User();
-        model.addAttribute("user", user);
-        System.out.println("creating user login form"); // for debugging
-        return "login";
-    }
-
 }

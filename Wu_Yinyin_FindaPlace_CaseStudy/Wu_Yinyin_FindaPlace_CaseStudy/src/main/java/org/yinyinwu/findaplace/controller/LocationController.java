@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.yinyinwu.findaplace.exceptions.AuthencationException;
 import org.yinyinwu.findaplace.model.Location;
 import org.yinyinwu.findaplace.service.LocationService;
 
@@ -25,10 +26,11 @@ public class LocationController {
 //    }
 
 
+    // list all locations
     @GetMapping("/location")
     public String listAllLocations(Model model) {
-        List<Location> locations = locationService.listAllLocations();
-        model.addAttribute("listLocations", locations);
+        List<Location> listLocations = locationService.listAllLocations();
+        model.addAttribute("listLocations", listLocations);
         return "location";
     }
 
@@ -46,6 +48,19 @@ public class LocationController {
         Location savedLocation = locationService.saveLocation(location);
         locationService.saveLocation(location);
         redirectAttributes.addFlashAttribute("message", "location added");
+        return "redirect:/location";
+    }
+
+    // delete location
+    @GetMapping("/location/delete/{id}")
+    public String deleteLocation(@PathVariable(name="id") Integer id, Model model,
+                                RedirectAttributes redirectAttributes) {
+        try {
+            locationService.deleteLocation(id);
+            redirectAttributes.addFlashAttribute("message", "deleted successfully");
+        } catch (AuthencationException ex) {
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
+        }
         return "redirect:/location";
     }
 }
