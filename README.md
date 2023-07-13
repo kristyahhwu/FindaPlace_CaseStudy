@@ -15,3 +15,6 @@ The project is built with Java, Spring Boot, Thymeleaf, JQuery, MySQL, and Boots
 3. Run SQL script file ``addrole.sql`` to add default roles to the database.
 4. Run the project using ``mvn spring-boot:run``
 5. open ``http://localhost:8080/`` in browser
+
+**Persentation Demo Link**
+Google Slides: https://docs.google.com/presentation/d/1cxDJmzI5Iv5GT8L4c_AN5TSpPXSL-MYWMsbharKlVdU/edit#slide=id.g2314b8e6400_0_1
